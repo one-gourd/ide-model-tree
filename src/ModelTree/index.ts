@@ -21,6 +21,8 @@ import { map, traverse, TRAVERSE_TYPE } from 'ss-tree';
 import { debugModel } from '../lib/debug';
 import { sortNumberDesc } from '../lib/utils';
 
+import { initTreeModelFromJSON } from './util';
+
 /**
  * tree model
  */
@@ -227,3 +229,9 @@ export const TreeModel: IAnyModelType = quickInitModel('TreeModel', {
 export interface ITreeModel extends Instance<typeof TreeModel> {}
 export interface ITreeModelSnapshot
   extends SnapshotOrInstance<typeof TreeModel> {}
+
+// 创建空树
+export const EMPTY_TREE_ROOT = 'EMPTY_TREE_ROOT';
+export const EMPTY_TREE_MODEL = initTreeModelFromJSON({
+  id: EMPTY_TREE_ROOT
+});
