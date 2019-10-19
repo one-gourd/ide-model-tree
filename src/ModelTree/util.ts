@@ -1,19 +1,37 @@
 import { TreeModel, ITreeModelSnapshot, ITreeModel } from './index';
 import { map } from 'ss-tree';
 
+interface IObject {
+  [key: string]: any;
+}
+
 const DEFAULT_ID_GEN = function(node: ITreeModelSnapshot) {
   return ('' + Math.random()).slice(2);
 };
 
+const DEFAULT_META_HANDLER = function(meta: IObject) {
+  return meta;
+};
+
+export interface IInitOptions {
+  idGenFn?: (node: ITreeModelSnapshot) => string;
+  metaHandler?: (meta: IObject) => IObject;
+}
+
 // 通过 json 初始化出 tree model
 export function initTreeModelFromJSON(
-  json: { [key: string]: any },
-  idGenFn = DEFAULT_ID_GEN
+  json: IObject,
+  options: IInitOptions = {}
 ) {
   // 传递给 map 函数的对象，必须具备 `children` 属性，否则没法迭代
   if (!json.children) {
     json.children = [];
   }
+
+  const {
+    idGenFn = DEFAULT_ID_GEN,
+    metaHandler = DEFAULT_META_HANDLER
+  } = options;
 
   return map(
     json,
@@ -23,7 +41,7 @@ export function initTreeModelFromJSON(
       const subModel = TreeModel.create({
         id
       });
-      subModel.setMeta(otherMeta); // 对 meta 属性进行设置
+      subModel.setMeta(metaHandler(otherMeta)); // 对 meta 属性进行设置
       return subModel;
     },
     true,

@@ -30,8 +30,10 @@ describe('initTreeModelFromJSON - 根据 json 创建 schema ', () => {
         {
           name: 'rootNode'
         },
-        function(node: ITreeModelSnapshot) {
-          return node.name + '-2';
+        {
+          idGenFn: function(node: ITreeModelSnapshot) {
+            return node.name + '-2';
+          }
         }
       );
       expect(model.id).toBe('rootNode-2');
