@@ -235,3 +235,4 @@ export const EMPTY_TREE_ROOT = 'EMPTY_TREE_ROOT';
 export const EMPTY_TREE_MODEL = initTreeModelFromJSON({
   id: EMPTY_TREE_ROOT
 });
+export const EMPTY_TREE_MODEL_SNAPSHOT = EMPTY_TREE_MODEL.toJSON();
