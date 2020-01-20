@@ -7,21 +7,18 @@ import {
   detach,
   clone
 } from 'mobx-state-tree';
-
 import {
   quickInitModel,
   JSONModel,
   EMPTY_JSON_SNAPSHOT
 } from 'ide-model-utils';
-
 import { pick, isExist } from 'ide-lib-utils';
-
 import { map, traverse, TRAVERSE_TYPE } from 'ss-tree';
 
 import { debugModel } from '../lib/debug';
 import { sortNumberDesc } from '../lib/utils';
-
 import { initTreeModelFromJSON } from './util';
+
 
 /**
  * tree model
